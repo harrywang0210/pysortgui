@@ -141,7 +141,6 @@ class SpikeSorterData(object):
             # get CH data timestamps as global
             if 'CH' in header['Name']:
                 self._getTimestamps(file_path)
-        logger.debug(raws_header)
 
         for file_path, header in raws_header:
             self._raws_dict[header['ID']] = ContinuousData(timestamps=self._records_timestamps,
@@ -600,13 +599,10 @@ class ContinuousData(object):
         self._data = np.asarray(data)
         self._data_loaded = True
 
-        logger.debug('check timestamp')
         # handle timestamp index mismatch
         if self._timestamps is None:
-            logger.debug('no timestamps')
             return
         if self._header['NumRecords'] != len(self._timestamps):
-            logger.debug('mismatch')
             logger.info('The length of global raw trace timestamps and the length of data mismatch. '
                         'Can not use global raw trace timestamps to corret time drift.')
             self._timestamps = None
@@ -1145,7 +1141,6 @@ class DiscreteData(object):
         """
         timestamps_mask = np.isin(self.unit_IDs, selected_unit_IDs)
         ts = self.timestamps[timestamps_mask]
-        # logger.debug(timestamps_mask)
         result = ISI(ts, sampling_freq=self.fs, bin_size=bin_size, t_max=t_max,
                      log_scale_y=log_scale_y, normalized=normalized)
         return result
