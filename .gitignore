@@ -1,6 +1,7 @@
 __pycache__
 data
 test*
+!examples/*
 pysortgui.egg-info
 build
 dist
