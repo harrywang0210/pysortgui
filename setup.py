@@ -1,14 +1,16 @@
 import pathlib
-
-import pkg_resources
 from setuptools import find_packages, setup
 
-with pathlib.Path('requirements.txt').open() as requirements_txt:
-    install_requires = [
-        str(requirement)
-        for requirement
-        in pkg_resources.parse_requirements(requirements_txt)
-    ]
+def parse_requirements(filename):
+    with pathlib.Path(filename).open() as f:
+        return [
+            line.strip()
+            for line in f
+            if line.strip() and not line.startswith("#")
+        ]
+
+install_requires = parse_requirements("requirements.txt")
+
 long_description = pathlib.Path("README.md").read_text(encoding="utf8")
 
 setup(
