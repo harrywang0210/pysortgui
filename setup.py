@@ -43,7 +43,7 @@ setup(
     url="https://github.com/HarryWang0210/PySortGUI",
     license="MIT",
     keywords="ephys neurons spike sorting",
-    python_requires='>=3.6',
+    python_requires=">=3.10,<3.13",
     # url="http://example.com/HelloWorld/",   # project home page, if any
 
     # could also include long_description, download_url, classifiers, etc.
